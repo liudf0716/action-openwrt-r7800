@@ -45,14 +45,16 @@ jobs:
           cp ${{ github.event.inputs.configFile }} openwrt/.config
           
       - name: Compile openwrt
+        id: compile
         run: |
           cd openwrt
           make defconfig
           make V=s
+          echo "::set-output name=status::success"
           
       - name: Upload bin directory
         uses: actions/upload-artifact@main
-        if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
+        if: steps.compile.outputs.status == 'success'
         with:
           name: ${{ github.event.inputs.openwrtBranch }}
-          path: openwrt/bin
+          path: openwrt/bin/targets
