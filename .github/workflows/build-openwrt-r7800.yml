@@ -1,5 +1,5 @@
 
-name: build openwrt r7800 base on branch 21.02
+name: build openwrt r7800
 
 # Controls when the workflow will run
 on:
@@ -11,6 +11,15 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      openwrtBranch:
+        description: 'input openwrt branch'
+        required: true
+        default: 'openwrt-19.07'
+      configFile:
+        description: 'input openwrt config file name'
+        required: true
+        default: 'config-r7800-1907'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -26,14 +35,14 @@ jobs:
         
       - name: Get openwrt source code
         run: |
-          git clone https://github.com/openwrt/openwrt.git -b openwrt-21.02
+          git clone https://github.com/openwrt/openwrt.git -b ${{ github.event.inputs.openwrtBranch }}
           cd openwrt
           ./scripts/feeds update -a
           ./scripts/feeds install -a
       
       - name: Load custom file for r7800
         run: |
-          cp config-r7800 openwrt/.config
+          cp ${{ github.event.inputs.configFile }} openwrt/.config
           
       - name: Compile openwrt
         run: |
@@ -45,5 +54,5 @@ jobs:
         uses: actions/upload-artifact@main
         if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
         with:
-          name: OpenWrt-21.02-R7800
+          name: ${{ github.event.inputs.openwrtBranch }}
           path: openwrt/bin
