@@ -15,11 +15,11 @@ on:
       openwrtBranch:
         description: 'input openwrt branch'
         required: true
-        default: 'openwrt-19.07'
+        default: 'openwrt-21.02'
       configFile:
         description: 'input openwrt config file name'
         required: true
-        default: 'config-r7800-1907'
+        default: 'config-r7800-2102'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
