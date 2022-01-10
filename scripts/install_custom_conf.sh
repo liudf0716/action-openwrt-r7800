@@ -1,21 +1,21 @@
 #!/bin/bash
 
 install_custom_conf() {
-  if [ -e "package/feeds/packages/apfree-wifidog/files/wifidogx.conf"]
+  if [ -e package/feeds/packages/apfree-wifidog/files/wifidogx.conf ]
   then
     cp ../apfree-wifidog/config/wifidogx package/feeds/packages/apfree-wifidog/files/wifidogx.conf
   else
     echo "apfree-wifidog not selected"
   fi
   
-  if [ -e "package/feeds/packages/frp/files/frpc.config"]  
+  if [ -e package/feeds/packages/frp/files/frpc.config ]  
   then
     cp ../frpc/config/frpc package/feeds/packages/frp/files/frpc.config
   else
     echo "frp not selected"
   fi
   
-  if [ -e "package/feeeds/packages/kcptun/files/kcptun.config"]  
+  if [ -e package/feeeds/packages/kcptun/files/kcptun.config ]  
   then
     cp ../kcptun/config/kcptun package/feeeds/packages/kcptun/files/kcptun.config
   else
@@ -23,7 +23,7 @@ install_custom_conf() {
     ls package/feeeds/packages/kcptun/files/
   fi
   
-  if [ -e "package/feeeds/packages/shadowsocks-libev/files/shadowsocks-libev.config"]  
+  if [ -e package/feeeds/packages/shadowsocks-libev/files/shadowsocks-libev.config ]  
   then
     cp ../ss-libev/config/shadowsocks-libev package/feeeds/packages/shadowsocks-libev/files/shadowsocks-libev.config
   else
@@ -31,7 +31,7 @@ install_custom_conf() {
     ls package/feeeds/packages/shadowsocks-libev/files/
   fi
   
-  if [ -e "package/network/services/uhttpd/files/uhttpd.config"]  
+  if [ -e package/network/services/uhttpd/files/uhttpd.config ]  
   then
     cp ../uhttpd/config/uhttpd  package/network/services/uhttpd/files/uhttpd.config
   else
