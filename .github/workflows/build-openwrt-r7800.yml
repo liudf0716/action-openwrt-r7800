@@ -41,20 +41,25 @@ jobs:
           ./scripts/feeds install -a
       
       - name: Load custom file for r7800
+        id: custom
         run: |
           cp ${{ github.event.inputs.configFile }} openwrt/.config
           chmod +x ./scripts/*.sh
           cp -p ./scripts/install_custom_conf.sh openwrt/
           cd openwrt
           ./install_custom_conf.sh
+          echo "::set-output name=status::fail"
       
       - name: Download package
+        id: download
+        if: steps.custom.output.status == 'success'
         run: |
           cd openwrt
           make download -j64
       
       - name: Compile openwrt
         id: compile
+        if: steps.download.output.status == 'success'
         run: |
           cd openwrt
           make defconfig
