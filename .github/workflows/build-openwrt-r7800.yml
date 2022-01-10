@@ -48,19 +48,17 @@ jobs:
           cp -p ./scripts/install_custom_conf.sh openwrt/
           cd openwrt
           ./install_custom_conf.sh
-          echo "::set-output name=status::success"
       
       - name: Download package
         id: download
-        if: steps.custom.output.status == 'success'
+        if: steps.custom.conclusion  == 'success'
         run: |
           cd openwrt
           make download -j64
-          echo "::set-output name=status::success"
       
       - name: Compile openwrt
         id: compile
-        if: steps.download.output.status == 'success'
+        if: steps.download.conclusion  == 'success'
         run: |
           cd openwrt
           make defconfig
