@@ -1,6 +1,8 @@
 #!/bin/bash
 
 install_custom_conf() {
+  ls 
+  
   if [ -e package/feeds/packages/apfree-wifidog/files/wifidogx.conf ]
   then
     cp ../apfree-wifidog/config/wifidogx package/feeds/packages/apfree-wifidog/files/wifidogx.conf
