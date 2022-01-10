@@ -1,1 +1,27 @@
-s
+config init
+	option stdout '1'
+	option stderr '1'
+	option respawn '1'
+	option user 'root'
+	option group 'root'
+
+config conf 'common'
+	option server_port '7000'
+	option server_addr 'your_frps_ip'
+	option log_level 'debug'
+	option protocol 'tcp'
+	option tls_enable 'false'
+
+config conf 'ssh'
+	option type 'tcp'
+	option local_ip '127.0.0.1'
+	option local_port '22'
+	option remote_port '6000'
+
+config conf 'http'
+	option type 'tcp'
+	option use_encryption 'false'
+	option use_compression 'false'
+	option local_ip '127.0.0.1'
+	option local_port '80'
+	option remote_port '6008'
