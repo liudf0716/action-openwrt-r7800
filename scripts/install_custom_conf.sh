@@ -1,8 +1,6 @@
 #!/bin/bash
 
 install_custom_conf() {
-  ls 
-  
   if [ -e package/feeds/packages/apfree-wifidog/files/wifidogx.conf ]
   then
     cp ../apfree-wifidog/config/wifidogx package/feeds/packages/apfree-wifidog/files/wifidogx.conf
@@ -17,17 +15,16 @@ install_custom_conf() {
     echo "frp not selected"
   fi
   
-  if [ -e package/feeeds/packages/kcptun/files/kcptun.config ]  
+  if [ -e package/feeds/packages/kcptun/files/kcptun.config ]  
   then
-    cp ../kcptun/config/kcptun package/feeeds/packages/kcptun/files/kcptun.config
+    cp ../kcptun/config/kcptun package/feeds/packages/kcptun/files/kcptun.config
   else
     echo "kcptun not selected"
-    ls package/feeeds/packages/
   fi
   
-  if [ -e package/feeeds/packages/shadowsocks-libev/files/shadowsocks-libev.config ]  
+  if [ -e package/feeds/packages/shadowsocks-libev/files/shadowsocks-libev.config ]  
   then
-    cp ../ss-libev/config/shadowsocks-libev package/feeeds/packages/shadowsocks-libev/files/shadowsocks-libev.config
+    cp ../ss-libev/config/shadowsocks-libev package/feeds/packages/shadowsocks-libev/files/shadowsocks-libev.config
   else
     echo "shadowsocks not selected"
   fi
