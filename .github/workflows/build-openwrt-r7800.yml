@@ -43,7 +43,16 @@ jobs:
       - name: Load custom file for r7800
         run: |
           cp ${{ github.event.inputs.configFile }} openwrt/.config
-          
+          chmod +x ./scripts/*.sh
+          cp -p ./scripts/install_custom_conf.sh openwrt/
+          cd openwrt
+          ./install_custom_conf.sh
+      
+      - name: Download package
+        run: |
+          cd openwrt
+          make download -j64
+      
       - name: Compile openwrt
         id: compile
         run: |
