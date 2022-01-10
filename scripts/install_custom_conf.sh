@@ -20,7 +20,7 @@ install_custom_conf() {
     cp ../kcptun/config/kcptun package/feeeds/packages/kcptun/files/kcptun.config
   else
     echo "kcptun not selected"
-    ls package/feeeds/packages/kcptun/files/
+    ls package/feeeds/packages/
   fi
   
   if [ -e package/feeeds/packages/shadowsocks-libev/files/shadowsocks-libev.config ]  
@@ -28,7 +28,6 @@ install_custom_conf() {
     cp ../ss-libev/config/shadowsocks-libev package/feeeds/packages/shadowsocks-libev/files/shadowsocks-libev.config
   else
     echo "shadowsocks not selected"
-    ls package/feeeds/packages/shadowsocks-libev/files/
   fi
   
   if [ -e package/network/services/uhttpd/files/uhttpd.config ]  
