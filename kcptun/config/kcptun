@@ -1,1 +1,25 @@
-a
+config server
+	option disabled 1
+	option listen 29900
+	option target '127.0.0.1'
+	option target_port 12948
+	option crypt 'aes'
+	option key 'secret'
+	option mode 'fast'
+	option datashard 10
+	option parityshard 3
+	option dscp 46
+	option nocomp 1
+	option snmplog '/var/log/snmp.log'
+	option snmpperiod 60
+	option pprof 1
+	option quiet 1
+	option syslog 1
+	option user nobody
+
+config client
+	option disabled 0
+	option bind_address '0.0.0.0'
+	option local_port 12948
+	option server 'your-kcptun-server-ip'
+	option server_port 19908
