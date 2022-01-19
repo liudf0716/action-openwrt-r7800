@@ -54,20 +54,34 @@ jobs:
         if: steps.custom.conclusion  == 'success'
         run: |
           cd openwrt
-          make download -j64
+          make defconfig
+          make download -j4
       
-      - name: Compile openwrt
-        id: compile
+      - name: Compile Tools
+        id: tools
         if: steps.download.conclusion  == 'success'
         run: |
           cd openwrt
-          make defconfig
+          make tools/compile -j4
+          
+      - name: Compile Toolchain
+        id: toolchain
+        if: steps.tools.conclusion == 'success'
+        run: |
+          cd openwrt
+          make toolchain/compile -j4
+      
+      - name: Compile firmware
+        id: firmware
+        if: steps.toolchain.conclusion  == 'success'
+        run: |
+          cd openwrt
           make V=s
           echo "::set-output name=status::success"
           
       - name: Upload bin directory
         uses: actions/upload-artifact@main
-        if: steps.compile.outputs.status == 'success'
+        if: steps.firmware.outputs.status == 'success'
         with:
           name: ${{ github.event.inputs.openwrtBranch }}
           path: openwrt/bin/targets
