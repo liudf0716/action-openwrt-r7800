@@ -39,6 +39,11 @@ jobs:
           cd openwrt
           ./scripts/feeds update -a
           ./scripts/feeds install -a
+          
+      - name: Get argon theme
+        run: |
+          cd openwrt/package
+          git clone https://github.com/jerrykuku/luci-theme-argon.git
       
       - name: Load custom file for r7800
         id: custom
@@ -71,9 +76,16 @@ jobs:
           cd openwrt
           make toolchain/compile -j4
       
+      - name: Compile package compile
+        id: package
+        if: steps.toolchain.conclusion  == 'success'
+        run: |
+          cd openwrt
+          make package/compile V=s
+      
       - name: Compile firmware
         id: firmware
-        if: steps.toolchain.conclusion  == 'success'
+        if: steps.package.conclusion  == 'success'
         run: |
           cd openwrt
           make V=s
