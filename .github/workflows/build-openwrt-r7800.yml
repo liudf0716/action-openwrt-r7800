@@ -81,6 +81,7 @@ jobs:
         if: steps.toolchain.conclusion  == 'success'
         run: |
           cd openwrt
+          make diffconfig
           make package/compile V=s
       
       - name: Compile firmware
